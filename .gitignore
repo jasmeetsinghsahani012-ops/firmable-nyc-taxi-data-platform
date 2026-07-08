@@ -1,0 +1,44 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment
+.env
+
+# Data (do not commit local datasets)
+data/raw/
+data/lookup/
+
+# Logs
+logs/
+*.log
+
+# dbt
+target/
+dbt_packages/
+profiles.yml
+dbt_packages/
+
+# Airflow
+airflow.db
+airflow-webserver.pid
+
+# IDE
+.vscode/
+.cursor/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Temporary files
+output.txt
