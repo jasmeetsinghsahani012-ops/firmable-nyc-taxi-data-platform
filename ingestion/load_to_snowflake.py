@@ -78,7 +78,7 @@ def put_files_to_stage(client: SnowflakeClient) -> None:
     lookup_path = str(LOOKUP_DATA_DIR / "taxi_zone_lookup.csv").replace("\\", "/")
 
     logger.info("Uploading parquet files to Snowflake stage.")
-    client.execute(f"PUT file://{parquet_path} @{PARQUET_STAGE} AUTO_COMPRESS=FALSE OVERWRITE=TRUE")
+    client.execute(f"PUT file://{parquet_path} @{PARQUET_STAGE} AUTO_COMPRESS=FALSE OVERWRITE=TRUE PARALLEL=8")
 
     logger.info("Uploading zone lookup file to Snowflake stage.")
     client.execute(f"PUT file://{lookup_path} @{LOOKUP_STAGE} AUTO_COMPRESS=FALSE OVERWRITE=TRUE")
@@ -115,8 +115,8 @@ def copy_into_tables(client: SnowflakeClient) -> None:
         FROM (
             SELECT
                 $1:VendorID::INTEGER,
-                $1:tpep_pickup_datetime::TIMESTAMP_NTZ,
-                $1:tpep_dropoff_datetime::TIMESTAMP_NTZ,
+                TO_TIMESTAMP_NTZ($1:tpep_pickup_datetime::NUMBER / 1000000),
+                TO_TIMESTAMP_NTZ($1:tpep_dropoff_datetime::NUMBER / 1000000),
                 $1:passenger_count::INTEGER,
                 $1:trip_distance::FLOAT,
                 $1:RatecodeID::INTEGER,

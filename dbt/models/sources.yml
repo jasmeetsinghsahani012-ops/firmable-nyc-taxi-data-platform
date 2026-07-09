@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: raw
+    database: FIRMABLE_TAXI_DB
+    schema: RAW
+
+    tables:
+      - name: YELLOW_TAXI_TRIPS_2023
+        description: Raw Yellow Taxi trip records loaded from NYC TLC Parquet files.
+
+      - name: TAXI_ZONE_LOOKUP
+        description: Taxi zone lookup reference table.
