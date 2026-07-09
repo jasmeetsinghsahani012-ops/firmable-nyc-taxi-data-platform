@@ -2,7 +2,14 @@ version: 2
 
 models:
   - name: stg_yellow_taxi_trips
-    description: Clean staging view for Yellow Taxi trip records.
+
+    tests:
+      - valid_trip_duration:
+          arguments:
+            pickup_column: tpep_pickup_datetime
+            dropoff_column: tpep_dropoff_datetime
+          config:
+            severity: warn
 
     columns:
       - name: vendor_id
@@ -26,8 +33,6 @@ models:
           - not_null
 
   - name: stg_taxi_zone_lookup
-    description: Clean staging view for taxi zones.
-
     columns:
       - name: location_id
         tests:
