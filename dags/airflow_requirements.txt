@@ -1,0 +1,6 @@
+apache-airflow==2.10.2
+dbt-snowflake
+python-dotenv
+snowflake-connector-python[pandas]
+pandas
+pyarrow
